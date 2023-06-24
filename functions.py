@@ -8,7 +8,8 @@ def converson_numero(msg,tipo= int):
 
         except ValueError:
             print('\033[31mPor favor digite um número\033[m')
-
+    
+    return num_convertido
 
 def titulo(msg, num=50):
     quant = num * 2
