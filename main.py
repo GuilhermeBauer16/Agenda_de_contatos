@@ -13,15 +13,13 @@ config = {
 }
 connection = mysql.connector.connect(**config)
 cursor = connection.cursor()
-senha = ''
-nome = ''
 
 def registra():
-    # global nome
-    # global senha 
+
+    global cursor
+    global connection 
     nome = str(input('Digite seu nome: '))
     senha = str(input('Digite sua senha: '))
-    banco = [nome , ]
 
     try :
         dados = f'''CREATE DATABASE IF NOT EXISTS {nome.replace(' ','_')}
@@ -30,13 +28,11 @@ def registra():
         cursor.execute(dados)
         cursor.execute(f'''
                        CREATE USER "{nome.replace(' ', '_')}"@"localhost" 
-                       IDENTIFIED BY "{connection.converter.escape(senha)}"''')  
+                       IDENTIFIED BY "{senha}"''')  
         cursor.execute(f"""
                        GRANT ALL PRIVILEGES ON {nome.replace(' ','_')}.*
                         TO '{nome.replace(' ','_')}'@'localhost' """)
         connection.commit()
-        connection.close()
-        cursor.close()
     except mysql.connector.Error as erro:
         print( f'erro {erro}')
         print('ouve um erro para registar o usuario ')
@@ -44,20 +40,26 @@ def registra():
 
 def login():
 
+    global cursor
+    global connection
     nome = str(input('Digite seu nome: '))
     senha = str(input('Digite sua senha: '))
 
     try: 
         
         cursor.execute(f'''USE {nome.replace(' ', '_')}''')
-        cursor.execute(f'''SELECT COUNT(*) FROM mysql.user WHERE user = "{nome.replace(' ', '_')}"
-                       AND authentication_string = "{senha}"''')
+        cursor.execute(f'''SELECT COUNT(*) FROM mysql.user WHERE user = %s 
+                       AND local = %s 
+                       AND authentication_string = %s''',
+                       (f'{nome.replace(' ', '_')}@localhost' , 'localhost', senha))
         result = cursor.fetchone()
 
         if result[0] == 1:
             print(f'Login bem sucedido, seja bem vindo {nome.replace('_', ' ')}')
         
-        else:
+        else :
+            erros = mysql.connector.Error 
+            print(erros)
             print('\033[31mUsuario ou senha incorretos\033[m')
 
     except mysql.connector.Error as erro:
