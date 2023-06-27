@@ -102,34 +102,108 @@ while True:
     [1]Novo Contato
     [2]Editar Contato
     [3]Deletar Contato
-    [4]Sair 
+    [4]Filtrar por Contato
+    [5]Voltar ao menu de login 
                 ''')
+            
             print('==' * 50)
             opcao_contato = functions.converson_numero('Sua opção: ', int)
             cursor.execute(f'''USE {nome.replace(' ', '_')}''')
+            sleep(1)
+            functions.limpa_terminal()
             if opcao_contato == 1:
                 functions.titulo("Novo contato ")
                 nome_contato = str(input('Nome: '))
                 telefone = str(input('Telefone: '))
                 email = str(input('email: '))
+                
+                try: 
+                    table =  f"""CREATE TABLE IF NOT EXISTS {nome_contato.replace(' ','_')}(
+                                id INT NOT NULL AUTO_INCREMENT ,
+                                nome VARCHAR(150) NOT NULL,
+                                telefone VARCHAR(15) NOT NULL , 
+                                email VARCHAR(150),
+                                PRIMARY KEY(id))
+                                default charset = utf8mb4"""
 
-                table =  f"""CREATE TABLE IF NOT EXISTS {nome_contato.replace(' ','_')}(
-                            id INT NOT NULL AUTO_INCREMENT ,
-                            nome VARCHAR(150) NOT NULL,
-                            telefone VARCHAR(15) NOT NULL , 
-                            email VARCHAR(150),
-                            PRIMARY KEY(id))
-                            default charset = utf8mb4"""
+                    cursor.execute(table)
 
-                cursor.execute(table)
+                    inserir = f'''INSERT INTO {nome_contato.replace(' ','_')}
+                    (nome , telefone , email ) VALUES 
+                    (%s , %s , %s )'''
+                    valores = ( nome_contato , telefone.replace(' ','_') , email)
 
-                inserir = f'''INSERT INTO {nome_contato.replace(' ','_')}
-                (nome , telefone , email ) VALUES 
-                (%s , %s , %s )'''
-                valores = ( nome_contato , telefone.replace(' ','_') , email)
+                    cursor.execute(inserir,valores)
+                    connection.commit()
+                    print(f"\033[32m{nome_contato.replace('_',' ')} adicionado com sucesso\033[m")
+                    sleep(1.5)
+                    functions.limpa_terminal()
 
-                cursor.execute(inserir,valores)
-                connection.commit()
+                except mysql.connector.Error as erro:
+                    print(f'erro : {erro}')
+                    print('\033[31mErro ao adicionar o contato ou o contato já existe\033[m')
+
+            elif opcao_contato == 2:
+                functions.titulo('Edição de contato')
+                novo_nome_contato = str(input('Nome: '))
+                novo_telefone = str(input('Telefone: '))
+                novo_email = str(input('email: '))
+                print('==' * 50)
+
+                try:
+                    update = f'''UPDATE {novo_nome_contato.replace(' ','_')} SET
+                    nome = %s , telefone = %s , email = %s '''
+                    novos_valores = (novo_nome_contato.replace(' ','_') , novo_telefone.replace(' ','_') , novo_email)
+
+                    cursor.execute(update, novos_valores)
+                    connection.commit()
+                    print(f'Contato {novo_nome_contato.replace('_',' ')} editado com sucesso')                
+                    sleep(1.5)
+                    functions.limpa_terminal()
+                
+                except mysql.connector.Error as erro:
+                    print(f'erro : {erro}')
+                    print('\033[31mErro ao editar o contato ou o contato não existe \033[m') 
+
+            elif opcao_contato == 3:
+                functions.titulo('Deleção do contato')
+                nome_deletar = str(input('Digite o nome do contato que deseja deletar: '))
+                print('==' * 50)
+
+                try:
+                    deleta = f"""DROP TABLE {nome_deletar.replace(' ','_')}"""
+                    cursor.execute(deleta)
+                    print(f"\033[32m{nome_deletar.replace('_',' ')} deletado com sucesso\033[m")
+                    sleep(1.5)
+                    functions.limpa_terminal()
+
+                except mysql.connector.Error as erro:
+                    print(f'erro : {erro}')
+                    print('\033[31mErro ao deletar o contato ou o contato não existe \033[m') 
+
+            elif opcao_contato == 4:
+                
+                functions.titulo('Filtro')
+                nome_filtrar = str(input('Digite o nome do contato que deseja filtrar: '))
+
+                try:
+                    filtro = f'''SELECT * FROM {nome_filtrar.replace(' ','_')}'''
+                    cursor.execute(filtro)
+                    tabela = cursor.fetchall()
+                    if tabela:
+                        for coluna in tabela:
+                            print(coluna)
+
+                except mysql.connector.Error as erro:
+                    print(f'erro : {erro}')
+                    print('\033[31mErro ao deletar o contato ou o contato não existe \033[m')
+
+            elif opcao_contato == 5:
+                functions.titulo('Voltando ao menu de login ')
+                sleep(1.5)
+                functions.limpa_terminal()
+                break
+
     elif opcao == 3:
         print('saindo...')
         sleep(1)
