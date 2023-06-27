@@ -110,14 +110,26 @@ while True:
             if opcao_contato == 1:
                 functions.titulo("Novo contato ")
                 nome_contato = str(input('Nome: '))
-                telefone = str('Telefone: ')
+                telefone = str(input('Telefone: '))
                 email = str(input('email: '))
 
-                tabela =  f"""CREATE TABLE IF NOT EXISTS {nome_contato.replace(' ','_')}
+                table =  f"""CREATE TABLE IF NOT EXISTS {nome_contato.replace(' ','_')}(
                             id INT NOT NULL AUTO_INCREMENT ,
                             nome VARCHAR(150) NOT NULL,
-                            telefone """
+                            telefone VARCHAR(15) NOT NULL , 
+                            email VARCHAR(150),
+                            PRIMARY KEY(id))
+                            default charset = utf8mb4"""
 
+                cursor.execute(table)
+
+                inserir = f'''INSERT INTO {nome_contato.replace(' ','_')}
+                (nome , telefone , email ) VALUES 
+                (%s , %s , %s )'''
+                valores = ( nome_contato , telefone.replace(' ','_') , email)
+
+                cursor.execute(inserir,valores)
+                connection.commit()
     elif opcao == 3:
         print('saindo...')
         sleep(1)
