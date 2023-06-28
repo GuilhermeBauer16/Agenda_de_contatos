@@ -20,3 +20,9 @@ e filtragem de contatos, tendo em seus contatos nome, telefone e email.
 
 
 Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbench. Aprendi a criar um usuário e definir as permissões de acesso, como criar, editar, deletar e limitar seu acesso utilizando comandos SQL. Também aprimorei meu conhecimento sobre o uso do Workbench. Essa parte do projeto foi desafiante, mas com pesquisa e persistência, consegui resolver os problemas na criação e login de usuários.
+
+## Funções
+
+* Criação de usuários : Com essa função você pode criar seu usuário com nome e senha e seu própria agenda de contatos.
+
+* 
