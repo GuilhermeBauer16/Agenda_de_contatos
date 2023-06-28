@@ -29,8 +29,14 @@ Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbe
 
 * Novo Contato: Com essa função você poderá adicionar seus contatos divido entre:
 
-  * nome: Onde você irá inserir o nome do contato.
+  * nome: Local onde você irá inserir o nome do contato.
 
-  * telefone:
-  *
-  * 
+  * telefone: Local onde você irá inserir o telefone do contato.
+
+  * email: Local onde você irá inserir o email do contato
+  
+* Possibilidade de editar o contatos que você adicionou.
+
+* Possibilidade de deletar o contatos que você adicionou.
+
+* filtro: Possibilidade de filtrar seus contatos pelo nome você os adicionou.
