@@ -17,6 +17,5 @@ e filtragem de contatos, tendo em seus contatos nome, telefone e email.
 
 ## Aprendizado
 
-Esse projeto teve como intuito de melhorar as minhas habilidades com MySQl e WorkBench , aprendi a criar
-um usuario no Workbenck e como definir as permissões que ele terá acesso como criar , editar , deletar.
-Esta parte do projeto foi bem desafiante , mas com uma boa pesquisa consegui resolver.
+
+Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbench. Aprendi a criar um usuário e definir as permissões de acesso, como criar, editar, deletar e limitar seu acesso utilizando comandos SQL. Também aprimorei meu conhecimento sobre o uso do Workbench. Essa parte do projeto foi desafiante, mas com pesquisa e persistência, consegui resolver os problemas na criação e login de usuários.
