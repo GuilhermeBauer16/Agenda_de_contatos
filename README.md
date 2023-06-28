@@ -23,6 +23,8 @@ Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbe
 
 ## Funções
 
-* Criação de usuários : Com essa função você pode criar seu usuário com nome e senha e seu própria agenda de contatos.
+* Criação de usuários : Com essa função você pode criar seu usuário com nome e senha e possuir sua própria agenda de contatos.
 
-* 
+* Login: Com essa função você poderá logar no seu usuário.
+
+*
