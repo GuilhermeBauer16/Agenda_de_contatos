@@ -14,3 +14,9 @@ e filtragem de contatos, tendo em seus contatos nome, telefone e email.
 
 ![image](https://github.com/GuilhermeBauer16/Agenda_de_contatos/assets/123701893/da862de8-5b1b-4695-8281-bb9aded8c550)
 
+
+## Aprendizado
+
+Esse projeto teve como intuito de melhorar as minhas habilidades com MySQl e WorkBench , aprendi a criar
+um usuario no Workbenck e como definir as permissões que ele terá acesso como criar , editar , deletar.
+Esta parte do projeto foi bem desafiante , mas com uma boa pesquisa consegui resolver.
