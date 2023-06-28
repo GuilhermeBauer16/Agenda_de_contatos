@@ -7,7 +7,7 @@ config = {
     'host': "localhost" ,
     'port': "3306" ,
     'user': "root" ,
-    'password': "0910",
+    'password': ,
     'raise_on_warnings': True
 
 }
@@ -63,6 +63,8 @@ while True:
         registra()
 
     elif opcao == 2:
+        sleep(1)
+        functions.limpa_terminal()
         while True:
             nome = str(input('Digite seu nome: '))
             senha = str(input('Digite sua senha: '))
@@ -145,21 +147,28 @@ while True:
 
             elif opcao_contato == 2:
                 functions.titulo('Edição de contato')
-                novo_nome_contato = str(input('Nome: '))
-                novo_telefone = str(input('Telefone: '))
-                novo_email = str(input('email: '))
+                edita_contato = str(input('Digite o nome do contato que deseja editar: '))
+
                 print('==' * 50)
 
                 try:
-                    update = f'''UPDATE {novo_nome_contato.replace(' ','_')} SET
-                    nome = %s , telefone = %s , email = %s '''
-                    novos_valores = (novo_nome_contato.replace(' ','_') , novo_telefone.replace(' ','_') , novo_email)
+                    cursor.execute(f"SHOW TABLES LIKE '{edita_contato.replace(' ','_')}'")
+                    edita = cursor.fetchone()
+                    if edita :
+                        novo_nome_contato = str(input('Nome: '))
+                        novo_telefone = str(input('Telefone: '))
+                        novo_email = str(input('email: '))
 
-                    cursor.execute(update, novos_valores)
-                    connection.commit()
-                    print(f'Contato {novo_nome_contato.replace('_',' ')} editado com sucesso')                
-                    sleep(1.5)
-                    functions.limpa_terminal()
+                        update = f"""UPDATE {edita_contato.replace(' ','_')} SET
+                        nome = %s , telefone = %s , email = %s """
+                        novos_valores = (novo_nome_contato.replace(' ','_') , novo_telefone.replace(' ','_') , novo_email)
+                        cursor.execute(update, novos_valores)
+                        cursor.execute(f"""ALTER TABLE {edita_contato.replace(' ','_')}
+                                       RENAME TO {novo_nome_contato.replace(' ','_')}""")
+                        connection.commit()
+                        print(f"\033[32mContato {novo_nome_contato.replace('_',' ')} editado com sucesso\033[m")                
+                        sleep(1)
+                        functions.limpa_terminal()
                 
                 except mysql.connector.Error as erro:
                     print(f'erro : {erro}')
@@ -192,7 +201,10 @@ while True:
                     tabela = cursor.fetchall()
                     if tabela:
                         for coluna in tabela:
-                            print(coluna)
+                            functions.titulo('Contato')
+                            print(f'Nome: {coluna[1]}')
+                            print(f'telefone: {coluna[2].replace('_', ' ')}')
+                            print(f'email: {coluna[3]}')
 
                 except mysql.connector.Error as erro:
                     print(f'erro : {erro}')
