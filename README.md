@@ -27,4 +27,10 @@ Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbe
 
 * Login: Com essa função você poderá logar no seu usuário.
 
-*
+* Novo Contato: Com essa função você poderá adicionar seus contatos divido entre:
+
+  * nome: Onde você irá inserir o nome do contato.
+
+  * telefone:
+  *
+  * 
