@@ -7,7 +7,7 @@ config = {
     'host': "localhost" ,
     'port': "3306" ,
     'user': "root" ,
-    'password': ,
+    'password':"0910" ,
     'raise_on_warnings': True
 
 }
@@ -18,6 +18,9 @@ def registra():
 
     global cursor
     global connection 
+    sleep(1)
+    functions.limpa_terminal()
+    functions.titulo('Novo usuário')
     nome = str(input('Digite seu nome: '))
     senha = str(input('Digite sua senha: '))
 
@@ -35,20 +38,16 @@ def registra():
                        GRANT ALL PRIVILEGES ON {nome.replace(' ','_')}.*
                         TO '{nome.replace(' ','_')}'@'localhost' """)
         connection.commit()
+        print(f'\033[32mNovo usuário {nome.replace('_', ' ')} cadastrado com sucesso\033[m')
+        sleep(1)
+        functions.limpa_terminal()
+
     except mysql.connector.Error as erro:
-        print( f'erro {erro}')
         print('ouve um erro para registar o usuario ')
 
 
-def login():
-
-    global cursor
-    global connection
-
-
-
 while True:
-    functions.titulo('Login')
+    functions.titulo('Agenda de contatos')
     print("""
 
 [1]Registar usuario 
@@ -66,6 +65,7 @@ while True:
         sleep(1)
         functions.limpa_terminal()
         while True:
+            functions.titulo('Login')
             nome = str(input('Digite seu nome: '))
             senha = str(input('Digite sua senha: '))
 
@@ -80,22 +80,12 @@ while True:
                 '''}
                 cursor.execute(f"SHOW GRANTS FOR '{nome.replace(' ','_')}'@'localhost'")
                 resulta = cursor.fetchall()
-                print(resulta)
+                print(f'\033[32mLogin do usuário {nome.replace('_', ' ')} realizado com sucesso\033[m')
+                sleep(1)
+                functions.limpa_terminal()
                 break
-                # cursor.execute(f'''SELECT User , authentication_string FROM mysql.user WHERE user = %s 
-                #                AND authentication_string = %s''',
-                #                (f'{nome.replace(' ', '_')}@localhost' , senha))
-                # result = cursor.fetchone()
-                # print(result)
-                # if result is not None:
-                #     print(f'Login bem sucedido, seja bem vindo {nome.replace('_', ' ')}')
-                
-                # else :
-        
-                #     print('\033[31mUsuario ou senha incorretos\033[m')
 
             except mysql.connector.Error as erro:
-                print(f'ocorreu o erro{erro}')
                 print('\033[31mUsuario ou senha incorretos\033[m')
 
         while True:
@@ -142,7 +132,6 @@ while True:
                     functions.limpa_terminal()
 
                 except mysql.connector.Error as erro:
-                    print(f'erro : {erro}')
                     print('\033[31mErro ao adicionar o contato ou o contato já existe\033[m')
 
             elif opcao_contato == 2:
@@ -171,7 +160,6 @@ while True:
                         functions.limpa_terminal()
                 
                 except mysql.connector.Error as erro:
-                    print(f'erro : {erro}')
                     print('\033[31mErro ao editar o contato ou o contato não existe \033[m') 
 
             elif opcao_contato == 3:
@@ -187,7 +175,6 @@ while True:
                     functions.limpa_terminal()
 
                 except mysql.connector.Error as erro:
-                    print(f'erro : {erro}')
                     print('\033[31mErro ao deletar o contato ou o contato não existe \033[m') 
 
             elif opcao_contato == 4:
@@ -207,7 +194,6 @@ while True:
                             print(f'email: {coluna[3]}')
 
                 except mysql.connector.Error as erro:
-                    print(f'erro : {erro}')
                     print('\033[31mErro ao deletar o contato ou o contato não existe \033[m')
 
             elif opcao_contato == 5:
