@@ -58,4 +58,4 @@ pip install mysql-connector-python
 
 ## Autor 
 
-  https://www.linkedin.com/in/guilherme-bauer-desemvolvedor/
+ www.linkedin.com/in/guilherme-bauer-desenvolvedor
