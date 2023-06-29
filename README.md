@@ -43,12 +43,12 @@ Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbe
 
 ## Necessário para a funcionalidade do projeto
 
-Para o funcionamento do projeto, você precisará instalar a biblioteca pymysql através do pip.
+Para o funcionamento do projeto, você precisará instalar a biblioteca mysql.connector através do pip.
 Você pode fazer isso no terminal da sua IDE ou do sistema operacional executando o seguinte comando
 
-pip install pymysql
+pip install mysql-connector-python
 
-![image](https://github.com/GuilhermeBauer16/Sistema_de_resesvas_hotel/assets/123701893/0bd9cde5-8354-4791-bc1d-128441e7dfbd)
+![image](https://github.com/GuilhermeBauer16/Agenda_de_contatos/assets/123701893/8fd6e86b-8dec-4a64-8e1f-2c197802c721)
 
 
 ## Autor 
