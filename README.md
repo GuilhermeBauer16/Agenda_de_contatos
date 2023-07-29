@@ -21,7 +21,7 @@ e filtragem de contatos, tendo em seus contatos nome, telefone e email.
 https://github.com/GuilhermeBauer16/Agenda_de_contatos/assets/123701893/3cbbaa03-f095-48d8-a567-00612ea667c4
 
 
-## Aprendizado
+## Aprendizado.     
 
 
 Esse projeto teve como intuito melhorar as minhas habilidades com MySQL e Workbench. Aprendi a criar um usuário e definir as permissões de acesso, como criar, editar, deletar e limitar seu acesso utilizando comandos SQL. Também aprimorei meu conhecimento sobre o uso do Workbench. Essa parte do projeto foi desafiante, mas com pesquisa e persistência, consegui resolver os problemas na criação e login de usuários.
